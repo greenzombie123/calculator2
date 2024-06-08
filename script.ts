@@ -41,7 +41,8 @@ function setInput(input: string) {
         displayValue(firstNumber)
     }
     else if (isFirstOperator(firstNumber, operator, input)){
-        console.log(12)
+        setOperator(input)
+        displayValue(firstNumber, operator)
     }
 }
 
@@ -67,6 +68,10 @@ function setFirstNumber(input: string) {
 
 function setSecondNumber() { }
 
+function setOperator(input:string){
+    operator = input
+}
+
 function isInputOperator(input: string) {
     // Check if the input is a =, +, *, or /
     return Number.isNaN(Number(input))
@@ -79,7 +84,7 @@ function isFirstOperator(firstNumber:number|null, operator:string|null, input:st
 
 function displayValue(firstNumber: number | null = null, operator: string | null = null, secondNumber: number | null = null, decimal: boolean = false) {
     const display = document.querySelector('.display')!
-    display.textContent = `${firstNumber}`
+    display.textContent = `${firstNumber}${operator ? " " + operator + " " : ""}`
 }
 
 function reset() { }

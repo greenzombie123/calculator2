@@ -33,7 +33,8 @@ function setInput(input) {
         displayValue(firstNumber);
     }
     else if (isFirstOperator(firstNumber, operator, input)) {
-        console.log(12);
+        setOperator(input);
+        displayValue(firstNumber, operator);
     }
 }
 function isFirstNumberEmpty(input) {
@@ -56,6 +57,9 @@ function setFirstNumber(input) {
     }
 }
 function setSecondNumber() { }
+function setOperator(input) {
+    operator = input;
+}
 function isInputOperator(input) {
     // Check if the input is a =, +, *, or /
     return Number.isNaN(Number(input));
@@ -72,7 +76,7 @@ function displayValue(firstNumber, operator, secondNumber, decimal) {
     if (secondNumber === void 0) { secondNumber = null; }
     if (decimal === void 0) { decimal = false; }
     var display = document.querySelector('.display');
-    display.textContent = "".concat(firstNumber);
+    display.textContent = "".concat(firstNumber).concat(operator ? " " + operator + " " : "");
 }
 function reset() { }
 function removeLastInput() { }
