@@ -2,8 +2,7 @@ let input: string;
 let firstNumber: number | null = null;
 let secondNumber: number | null = null;
 let operator: string | null = null;
-let decimal = false;
-type Result = number;
+let decimalNumber: string = "";
 const decimalPlace = 6
 
 
@@ -49,6 +48,10 @@ function setInput(input: string) {
         setFirstNumber(input)
         displayValue(firstNumber)
     }
+    else if (isDecimalinFirstNumber(firstNumber, input, operator, decimalNumber)) {
+        setDecimalNumber(input)
+        displayValue(firstNumber, operator, null, decimalNumber)
+    }
     else if (isFirstOperator(firstNumber, operator, input)) {
         setOperator(input)
         displayValue(firstNumber, operator)
@@ -63,6 +66,22 @@ function setInput(input: string) {
     }
 }
 
+function isDecimalinFirstNumber(firstNumber: number | null, input: string, operator: string | null, decimalNumber: string) {
+    return firstNumber !== null && input === "." && operator === null && decimalNumber === ""
+}
+
+function setDecimalNumber(input: number | string) {
+    if (typeof input === "string") {
+        decimalNumber = "."
+    }
+    else
+        decimalNumber += input
+}
+
+function resetDecimalNumber() {
+    decimalNumber = ""
+}
+
 function isFirstNumberEmpty(input: string) {
     if (firstNumber === null && !operator && isInputNumber(input)) return true
     else return false
@@ -73,8 +92,8 @@ function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumb
     return false
 }
 
-function setFirstNumber(input: string|number) {
-    if(typeof input === 'number'){
+function setFirstNumber(input: string | number) {
+    if (typeof input === 'number') {
         firstNumber = input
     }
     else if (firstNumber === null) {
@@ -96,8 +115,8 @@ function isSecondNumberGetBigger(input: string, secondNumber: number | null) {
 }
 
 
-function setSecondNumber(input: string|null) {
-    if(input === null){
+function setSecondNumber(input: string | null) {
+    if (input === null) {
         secondNumber = null;
     }
     else if (secondNumber === null) {
@@ -108,7 +127,7 @@ function setSecondNumber(input: string|null) {
     }
 }
 
-function setOperator(input: string|null) {
+function setOperator(input: string | null) {
     operator = input
 }
 
@@ -122,9 +141,9 @@ function isFirstOperator(firstNumber: number | null, operator: string | null, in
     else return false
 }
 
-function displayValue(firstNumber: number | null = null, operator: string | null = null, secondNumber: number | null = null, decimal: boolean = false) {
+function displayValue(firstNumber: number | null = null, operator: string | null = null, secondNumber: number | null = null, decimal: string = "") {
     const display = document.querySelector('.display')!
-    display.textContent = `${firstNumber !== null ? firstNumber : ""}${operator ? " " + operator + " " : ""}${secondNumber !== null ? secondNumber : ""}`
+    display.textContent = `${firstNumber !== null ? firstNumber : ""}${decimal ? '.' : ""}${operator ? " " + operator + " " : ""}${secondNumber !== null ? secondNumber : ""}`
 }
 
 function reset() { }
@@ -139,7 +158,7 @@ function isSecondNumberZero(secondNumber: number) {
     return secondNumber === 0
 }
 
-function getFirstNumber(){
+function getFirstNumber() {
     return firstNumber
 }
 
@@ -172,7 +191,7 @@ function operate(firstNumber: number, operator: string, secondNumber: number) {
         let result = add(firstNumber, secondNumber)
         setFirstNumber(result)
     }
-    else if(operator === "-"){
+    else if (operator === "-") {
         let result = subtract(firstNumber, secondNumber)
         setFirstNumber(result)
     }
@@ -180,7 +199,7 @@ function operate(firstNumber: number, operator: string, secondNumber: number) {
         let result = multiply(firstNumber, secondNumber)
         setFirstNumber(result)
     }
-    else if(operator === "/"){
+    else if (operator === "/") {
         let result = divide(firstNumber, secondNumber)
         setFirstNumber(result)
     }

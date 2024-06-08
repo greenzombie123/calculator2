@@ -2,7 +2,7 @@ var input;
 var firstNumber = null;
 var secondNumber = null;
 var operator = null;
-var decimal = false;
+var decimalNumber = "";
 var decimalPlace = 6;
 var buttons = document.querySelectorAll("button");
 buttons.forEach(function (button) {
@@ -40,6 +40,10 @@ function setInput(input) {
         setFirstNumber(input);
         displayValue(firstNumber);
     }
+    else if (isDecimalinFirstNumber(firstNumber, input, operator, decimalNumber)) {
+        setDecimalNumber(input);
+        displayValue(firstNumber, operator, null, decimalNumber);
+    }
     else if (isFirstOperator(firstNumber, operator, input)) {
         setOperator(input);
         displayValue(firstNumber, operator);
@@ -52,6 +56,19 @@ function setInput(input) {
         setSecondNumber(input);
         displayValue(firstNumber, operator, secondNumber);
     }
+}
+function isDecimalinFirstNumber(firstNumber, input, operator, decimalNumber) {
+    return firstNumber !== null && input === "." && operator === null && decimalNumber === "";
+}
+function setDecimalNumber(input) {
+    if (typeof input === "string") {
+        decimalNumber = ".";
+    }
+    else
+        decimalNumber += input;
+}
+function resetDecimalNumber() {
+    decimalNumber = "";
 }
 function isFirstNumberEmpty(input) {
     if (firstNumber === null && !operator && isInputNumber(input))
@@ -114,9 +131,9 @@ function displayValue(firstNumber, operator, secondNumber, decimal) {
     if (firstNumber === void 0) { firstNumber = null; }
     if (operator === void 0) { operator = null; }
     if (secondNumber === void 0) { secondNumber = null; }
-    if (decimal === void 0) { decimal = false; }
+    if (decimal === void 0) { decimal = ""; }
     var display = document.querySelector('.display');
-    display.textContent = "".concat(firstNumber !== null ? firstNumber : "").concat(operator ? " " + operator + " " : "").concat(secondNumber !== null ? secondNumber : "");
+    display.textContent = "".concat(firstNumber !== null ? firstNumber : "").concat(decimal ? '.' : "").concat(operator ? " " + operator + " " : "").concat(secondNumber !== null ? secondNumber : "");
 }
 function reset() { }
 function removeLastInput() { }
