@@ -40,6 +40,10 @@ function setInput(input) {
         setSecondNumber(input);
         displayValue(firstNumber, operator, secondNumber);
     }
+    else if (isSecondNumberGetBigger(input, secondNumber)) {
+        setSecondNumber(input);
+        displayValue(firstNumber, operator, secondNumber);
+    }
 }
 function isFirstNumberEmpty(input) {
     if (firstNumber === null && !operator && isInputNumber(input))

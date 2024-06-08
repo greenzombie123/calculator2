@@ -48,6 +48,10 @@ function setInput(input: string) {
         setSecondNumber(input)
         displayValue(firstNumber, operator, secondNumber)
     }
+    else if (isSecondNumberGetBigger(input, secondNumber)){
+        setSecondNumber(input)
+        displayValue(firstNumber, operator, secondNumber)
+    }
 }
 
 function isFirstNumberEmpty(input: string) {
@@ -74,7 +78,7 @@ function isSecondNumberEmpty(input: string) {
     else return false
 }
 
-function isSecondNumberGetBigger(input: string, secondNumber: number) {
+function isSecondNumberGetBigger(input: string, secondNumber: number|null) {
     if (secondNumber !== null && isInputNumber(input) && !isSecondNumberZero(secondNumber)) return true
     return false
 }
