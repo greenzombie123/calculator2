@@ -12,14 +12,25 @@ buttons.forEach(button=>{
     if(text !== '=' && text !== 'backSpace' && text !== 'clear'){
         button.addEventListener("click", (e:Event)=>{
             getInput(e)
+            if(isInputNumber(input)){
+                console.log(12)
+            }
         })
     }
 })
 
 function getInput(event:Event){
     input = (event.target as Element).textContent!
-    console.log(input)
 }
+
+function setInput(input){}
+
+function isInputNumber(input:string|number):boolean{
+    // String with no numbers will turn into a Nan. If its a NaN, it aint a valid number so return false
+    return !Number.isNaN(Number(input))
+}
+
+function changeToNumber(input:string)
 
 function reset(){}
 function removeLastInput(){}

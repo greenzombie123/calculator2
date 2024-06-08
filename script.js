@@ -9,12 +9,19 @@ buttons.forEach(function (button) {
     if (text !== '=' && text !== 'backSpace' && text !== 'clear') {
         button.addEventListener("click", function (e) {
             getInput(e);
+            if (isInputNumber(input)) {
+                console.log(12);
+            }
         });
     }
 });
 function getInput(event) {
     input = event.target.textContent;
-    console.log(input);
+}
+function setInput(input) { }
+function isInputNumber(input) {
+    // String with no numbers will turn into a Nan. If its a NaN, it aint a valid number so return false
+    return !Number.isNaN(Number(input));
 }
 function reset() { }
 function removeLastInput() { }
