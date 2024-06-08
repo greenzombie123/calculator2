@@ -37,7 +37,8 @@ function setInput(input: string) {
         displayValue(firstNumber)
     }
     else if (isFirstNumberGetBigger(input)){
-        console.log(123)
+        setFirstNumber(input)
+        displayValue(firstNumber)
     }
 }
 
@@ -52,6 +53,9 @@ function isFirstNumberGetBigger(iput: string){
 function setFirstNumber(input: string) {
     if (firstNumber === null) {
         firstNumber = +input
+    }
+    else if(firstNumber){
+        firstNumber = +(firstNumber + input)
     }
 }
 

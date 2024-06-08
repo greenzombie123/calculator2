@@ -29,7 +29,8 @@ function setInput(input) {
         displayValue(firstNumber);
     }
     else if (isFirstNumberGetBigger(input)) {
-        console.log(123);
+        setFirstNumber(input);
+        displayValue(firstNumber);
     }
 }
 function isFirstNumberEmpty(input) {
@@ -41,6 +42,9 @@ function isFirstNumberGetBigger(iput) {
 function setFirstNumber(input) {
     if (firstNumber === null) {
         firstNumber = +input;
+    }
+    else if (firstNumber) {
+        firstNumber = +(firstNumber + input);
     }
 }
 function setSecondNumber() { }
