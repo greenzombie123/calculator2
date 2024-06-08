@@ -1,6 +1,6 @@
 var input;
 var firstNumber = "";
-var secondNumber = null;
+var secondNumber = "";
 var operator = null;
 var decimal = "";
 var decimalPlace = 6;
@@ -46,7 +46,7 @@ function setInput(input) {
     // }
     else if (isInputFirstDecimal(firstNumber, input, operator, decimal)) {
         setDecimal();
-        displayValue(firstNumber, operator, null, decimal);
+        displayValue(firstNumber, operator, "", decimal);
     }
     // else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
     //     setFirstNumber(input, decimal)
@@ -56,7 +56,7 @@ function setInput(input) {
     else if (isNumberDecimalNumber(firstNumber, input, operator, decimal)) {
         setFirstNumber(input, decimal);
         resetDecimal();
-        displayValue(firstNumber, operator, null, decimal);
+        displayValue(firstNumber, operator, "", decimal);
     }
     else if (isFirstOperator(firstNumber, operator, input)) {
         setOperator(input);
@@ -118,25 +118,25 @@ function setFirstNumber(input, decimal, isResult) {
     }
 }
 function isSecondNumberEmpty(input) {
-    if (secondNumber === null && operator && isInputNumber(input))
+    if (secondNumber === "" && operator && isInputNumber(input))
         return true;
     else
         return false;
 }
 function isSecondNumberGetBigger(input, secondNumber) {
-    if (secondNumber !== null && isInputNumber(input) && !isSecondNumberZero(secondNumber))
+    if (secondNumber !== "" && isInputNumber(input) && !isSecondNumberZero(secondNumber))
         return true;
     return false;
 }
 function setSecondNumber(input) {
-    if (input === null) {
-        secondNumber = null;
+    if (input === "") {
+        secondNumber = "";
     }
-    else if (secondNumber === null) {
-        secondNumber = +input;
+    else if (secondNumber === "") {
+        secondNumber = input;
     }
     else if (secondNumber) {
-        secondNumber = +(secondNumber + input);
+        secondNumber = secondNumber + input;
     }
 }
 function setOperator(input) {
@@ -155,7 +155,7 @@ function isFirstOperator(firstNumber, operator, input) {
 function displayValue(firstNumber, operator, secondNumber, decimal) {
     if (firstNumber === void 0) { firstNumber = ""; }
     if (operator === void 0) { operator = null; }
-    if (secondNumber === void 0) { secondNumber = null; }
+    if (secondNumber === void 0) { secondNumber = ""; }
     if (decimal === void 0) { decimal = ""; }
     var display = document.querySelector('.display');
     display.textContent = "".concat(firstNumber !== "" ? firstNumber : "").concat(decimal ? '.' : "").concat(operator ? " " + operator + " " : "").concat(secondNumber !== null ? secondNumber : "");
@@ -166,29 +166,29 @@ function isFirstNumberZero(firstNumber) {
     return firstNumber === "0";
 }
 function isSecondNumberZero(secondNumber) {
-    return secondNumber === 0;
+    return secondNumber === "0";
 }
 function getFirstNumber() {
     return firstNumber;
 }
 function add(firstNumber, secondNumber) {
-    var result = +firstNumber + secondNumber;
+    var result = +firstNumber + +secondNumber;
     return Number(result.toFixed(decimalPlace)).toString();
 }
 function subtract(firstNumber, secondNumber) {
-    var result = (+firstNumber) - secondNumber;
+    var result = (+firstNumber) - +secondNumber;
     return Number(result.toFixed(decimalPlace)).toString();
 }
 function multiply(firstNumber, secondNumber) {
-    var result = (+firstNumber) * secondNumber;
+    var result = (+firstNumber) * +secondNumber;
     return Number(result.toFixed(decimalPlace)).toString();
 }
 function divide(firstNumber, secondNumber) {
-    var result = (+firstNumber) / secondNumber;
+    var result = (+firstNumber) / +secondNumber;
     return Number(result.toFixed(decimalPlace)).toString();
 }
 function canOperate(firstNumber, operator, secondNumber) {
-    return firstNumber !== "" && operator !== null && secondNumber !== null;
+    return firstNumber !== "" && operator !== null && secondNumber !== "";
 }
 function operate(firstNumber, operator, secondNumber) {
     if (operator === "+") {
@@ -208,6 +208,6 @@ function operate(firstNumber, operator, secondNumber) {
         setFirstNumber(result, "", true);
     }
     displayValue(getFirstNumber());
-    setSecondNumber(null);
+    setSecondNumber("");
     setOperator(null);
 }
