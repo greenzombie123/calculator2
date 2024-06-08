@@ -3,7 +3,7 @@ let firstNumber: number | null = null;
 let secondNumber: number | null = null;
 let operator: string | null = null;
 let decimal = false;
-let result: number;
+type Result = number;
 const decimalPlace = 6
 
 
@@ -73,8 +73,11 @@ function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumb
     return false
 }
 
-function setFirstNumber(input: string) {
-    if (firstNumber === null) {
+function setFirstNumber(input: string|number) {
+    if(typeof input === 'number'){
+        firstNumber = input
+    }
+    else if (firstNumber === null) {
         firstNumber = +input
     }
     else if (firstNumber) {
@@ -93,8 +96,11 @@ function isSecondNumberGetBigger(input: string, secondNumber: number | null) {
 }
 
 
-function setSecondNumber(input: string) {
-    if (secondNumber === null) {
+function setSecondNumber(input: string|null) {
+    if(input === null){
+        secondNumber = null;
+    }
+    else if (secondNumber === null) {
         secondNumber = +input
     }
     else if (secondNumber) {
@@ -102,7 +108,7 @@ function setSecondNumber(input: string) {
     }
 }
 
-function setOperator(input: string) {
+function setOperator(input: string|null) {
     operator = input
 }
 
@@ -133,6 +139,10 @@ function isSecondNumberZero(secondNumber: number) {
     return secondNumber === 0
 }
 
+function getFirstNumber(){
+    return firstNumber
+}
+
 function add(firstNumber: number, secondNumber: number) {
     let result = firstNumber + secondNumber
     return Number(result.toFixed(decimalPlace))
@@ -159,7 +169,10 @@ function canOperate(firstNumber: number | null, operator: string | null, secondN
 
 function operate(firstNumber: number, operator: string, secondNumber: number) {
     if (operator === "+") {
-        firstNumber = add(firstNumber, secondNumber)
+        let result = add(firstNumber, secondNumber)
+        setFirstNumber(result)
     }
-    displayValue(firstNumber)
+    displayValue(getFirstNumber())
+    setSecondNumber(null)
+    setOperator(null)
 }

@@ -3,7 +3,6 @@ var firstNumber = null;
 var secondNumber = null;
 var operator = null;
 var decimal = false;
-var result;
 var decimalPlace = 6;
 var buttons = document.querySelectorAll("button");
 buttons.forEach(function (button) {
@@ -66,7 +65,10 @@ function isFirstNumberGetBigger(iput, operator, firstNumber) {
     return false;
 }
 function setFirstNumber(input) {
-    if (firstNumber === null) {
+    if (typeof input === 'number') {
+        firstNumber = input;
+    }
+    else if (firstNumber === null) {
         firstNumber = +input;
     }
     else if (firstNumber) {
@@ -85,7 +87,10 @@ function isSecondNumberGetBigger(input, secondNumber) {
     return false;
 }
 function setSecondNumber(input) {
-    if (secondNumber === null) {
+    if (input === null) {
+        secondNumber = null;
+    }
+    else if (secondNumber === null) {
         secondNumber = +input;
     }
     else if (secondNumber) {
@@ -121,6 +126,9 @@ function isFirstNumberZero(firstNumber) {
 function isSecondNumberZero(secondNumber) {
     return secondNumber === 0;
 }
+function getFirstNumber() {
+    return firstNumber;
+}
 function add(firstNumber, secondNumber) {
     var result = firstNumber + secondNumber;
     return Number(result.toFixed(decimalPlace));
@@ -142,7 +150,10 @@ function canOperate(firstNumber, operator, secondNumber) {
 }
 function operate(firstNumber, operator, secondNumber) {
     if (operator === "+") {
-        firstNumber = add(firstNumber, secondNumber);
+        var result = add(firstNumber, secondNumber);
+        setFirstNumber(result);
     }
-    displayValue(firstNumber);
+    displayValue(getFirstNumber());
+    setSecondNumber(null);
+    setOperator(null);
 }
