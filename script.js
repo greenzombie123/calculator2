@@ -172,20 +172,20 @@ function getFirstNumber() {
     return firstNumber;
 }
 function add(firstNumber, secondNumber) {
-    var result = (+firstNumber) + secondNumber;
+    var result = +firstNumber + secondNumber;
     return Number(result.toFixed(decimalPlace)).toString();
 }
 function subtract(firstNumber, secondNumber) {
-    var result = firstNumber - secondNumber;
-    return Number(result.toFixed(decimalPlace));
+    var result = (+firstNumber) - secondNumber;
+    return Number(result.toFixed(decimalPlace)).toString();
 }
 function multiply(firstNumber, secondNumber) {
-    var result = firstNumber * secondNumber;
-    return Number(result.toFixed(decimalPlace));
+    var result = (+firstNumber) * secondNumber;
+    return Number(result.toFixed(decimalPlace)).toString();
 }
 function divide(firstNumber, secondNumber) {
-    var result = firstNumber / secondNumber;
-    return Number(result.toFixed(decimalPlace));
+    var result = (+firstNumber) / secondNumber;
+    return Number(result.toFixed(decimalPlace)).toString();
 }
 function canOperate(firstNumber, operator, secondNumber) {
     return firstNumber !== "" && operator !== null && secondNumber !== null;
@@ -197,15 +197,15 @@ function operate(firstNumber, operator, secondNumber) {
     }
     else if (operator === "-") {
         var result = subtract(firstNumber, secondNumber);
-        setFirstNumber(result);
+        setFirstNumber(result, "", true);
     }
     else if (operator === "x") {
         var result = multiply(firstNumber, secondNumber);
-        setFirstNumber(result);
+        setFirstNumber(result, "", true);
     }
     else if (operator === "/") {
         var result = divide(firstNumber, secondNumber);
-        setFirstNumber(result);
+        setFirstNumber(result, "", true);
     }
     displayValue(getFirstNumber());
     setSecondNumber(null);

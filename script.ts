@@ -109,7 +109,7 @@ function isFirstNumberEmpty(input: string) {
     else return false
 }
 
-function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumber: string | null, decimal:string) {
+function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumber: string, decimal:string) {
     if (firstNumber !== "" && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber) && decimal === "") return true
     return false
 }
@@ -189,23 +189,23 @@ function getFirstNumber() {
 }
 
 function add(firstNumber: string, secondNumber: number) {
-    let result = (+firstNumber) + secondNumber
+    let result = +firstNumber + secondNumber
     return Number(result.toFixed(decimalPlace)).toString()
 }
 
-function subtract(firstNumber: number, secondNumber: number) {
-    let result = firstNumber - secondNumber
-    return Number(result.toFixed(decimalPlace))
+function subtract(firstNumber: string, secondNumber: number) {
+    let result = (+firstNumber) - secondNumber
+    return Number(result.toFixed(decimalPlace)).toString()
 }
 
-function multiply(firstNumber: number, secondNumber: number) {
-    let result = firstNumber * secondNumber
-    return Number(result.toFixed(decimalPlace))
+function multiply(firstNumber: string, secondNumber: number) {
+    let result = (+firstNumber) * secondNumber
+    return Number(result.toFixed(decimalPlace)).toString()
 }
 
-function divide(firstNumber: number, secondNumber: number) {
-    let result = firstNumber / secondNumber
-    return Number(result.toFixed(decimalPlace))
+function divide(firstNumber: string, secondNumber: number) {
+    let result = (+firstNumber) / secondNumber
+    return Number(result.toFixed(decimalPlace)).toString()
 }
 
 function canOperate(firstNumber: string, operator: string | null, secondNumber: number | null): boolean {
@@ -219,15 +219,15 @@ function operate(firstNumber: string, operator: string, secondNumber: number) {
     }
     else if (operator === "-") {
         let result = subtract(firstNumber, secondNumber)
-        setFirstNumber(result)
+        setFirstNumber(result, "", true)
     }
     else if (operator === "x") {
         let result = multiply(firstNumber, secondNumber)
-        setFirstNumber(result)
+        setFirstNumber(result, "", true)
     }
     else if (operator === "/") {
         let result = divide(firstNumber, secondNumber)
-        setFirstNumber(result)
+        setFirstNumber(result, "", true)
     }
 
     displayValue(getFirstNumber())
