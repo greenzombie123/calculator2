@@ -44,17 +44,17 @@ function setInput(input: string) {
         setFirstNumber(input)
         displayValue(firstNumber)
     }
-    else if (isFirstNumberGetBigger(input, operator, firstNumber)) {
+    else if (isFirstNumberGetBigger(input, operator, firstNumber, decimal)) {
         setFirstNumber(input)
         displayValue(firstNumber)
     }
     else if (isDecimalinFirstNumber(firstNumber, input, operator, decimal)) {
-        setDecimal(input)
+        setDecimal()
         displayValue(firstNumber, operator, null, decimal)
     }
     else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
         setFirstNumber(input, decimal)
-        resetDecimalNumber()
+        resetDecimal()
         displayValue(firstNumber, operator, null, decimal)
     }
     else if (isFirstOperator(firstNumber, operator, input)) {
@@ -76,14 +76,14 @@ function isDecimalinFirstNumber(firstNumber: number | null, input: string, opera
 }
 
 function isFirstNumberDecimalNumber(firstNumber: number | null, input: string, operator: string | null, decimal: string) {
-    return firstNumber !== null && typeof input === "number" && operator === null && decimal === "."
+    return firstNumber !== null && isInputNumber(input) && operator === null && decimal === "."
 }
 
-function setDecimal(input: string) {
+function setDecimal() {
     decimal = "."
 }
 
-function resetDecimalNumber() {
+function resetDecimal() {
     decimal = ""
 }
 
@@ -92,8 +92,8 @@ function isFirstNumberEmpty(input: string) {
     else return false
 }
 
-function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumber: number | null) {
-    if (firstNumber !== null && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber)) return true
+function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumber: number | null, decimal:string) {
+    if (firstNumber !== null && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber) && decimal === "") return true
     return false
 }
 
