@@ -10,7 +10,7 @@ buttons.forEach(function (button) {
         button.addEventListener("click", function (e) {
             getInput(e);
             if (isInputNumber(input)) {
-                console.log(12);
+                input = changeToNumber(input);
             }
         });
     }
@@ -22,6 +22,9 @@ function setInput(input) { }
 function isInputNumber(input) {
     // String with no numbers will turn into a Nan. If its a NaN, it aint a valid number so return false
     return !Number.isNaN(Number(input));
+}
+function changeToNumber(input) {
+    return +input;
 }
 function reset() { }
 function removeLastInput() { }

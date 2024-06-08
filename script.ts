@@ -13,7 +13,7 @@ buttons.forEach(button=>{
         button.addEventListener("click", (e:Event)=>{
             getInput(e)
             if(isInputNumber(input)){
-                console.log(12)
+                input = changeToNumber(input as string)
             }
         })
     }
@@ -30,7 +30,9 @@ function isInputNumber(input:string|number):boolean{
     return !Number.isNaN(Number(input))
 }
 
-function changeToNumber(input:string)
+function changeToNumber(input:string):number{
+    return +input
+}
 
 function reset(){}
 function removeLastInput(){}
