@@ -3,6 +3,8 @@ let firstNumber: number | null = null;
 let secondNumber: number | null = null;
 let operator: string | null = null;
 let decimal = false;
+let result: number;
+const decimalPlace = 6
 
 
 const buttons = document.querySelectorAll("button")
@@ -13,6 +15,13 @@ buttons.forEach(button => {
         button.addEventListener("click", (e: Event) => {
             getInput(e)
             setInput(input)
+        })
+    }
+    if (text === '=') {
+        button.addEventListener("click", () => {
+            if (canOperate(firstNumber, operator, secondNumber)) {
+                operate(firstNumber!, operator!, secondNumber!)
+            }
         })
     }
 })
@@ -48,7 +57,7 @@ function setInput(input: string) {
         setSecondNumber(input)
         displayValue(firstNumber, operator, secondNumber)
     }
-    else if (isSecondNumberGetBigger(input, secondNumber)){
+    else if (isSecondNumberGetBigger(input, secondNumber)) {
         setSecondNumber(input)
         displayValue(firstNumber, operator, secondNumber)
     }
@@ -59,7 +68,7 @@ function isFirstNumberEmpty(input: string) {
     else return false
 }
 
-function isFirstNumberGetBigger(iput: string, operator:string|null, firstNumber:number|null) {
+function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumber: number | null) {
     if (firstNumber !== null && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber)) return true
     return false
 }
@@ -78,7 +87,7 @@ function isSecondNumberEmpty(input: string) {
     else return false
 }
 
-function isSecondNumberGetBigger(input: string, secondNumber: number|null) {
+function isSecondNumberGetBigger(input: string, secondNumber: number | null) {
     if (secondNumber !== null && isInputNumber(input) && !isSecondNumberZero(secondNumber)) return true
     return false
 }
@@ -122,4 +131,35 @@ function isFirstNumberZero(firstNumber: number) {
 
 function isSecondNumberZero(secondNumber: number) {
     return secondNumber === 0
+}
+
+function add(firstNumber: number, secondNumber: number) {
+    let result = firstNumber + secondNumber
+    return Number(result.toFixed(decimalPlace))
+}
+
+function subtract(firstNumber: number, secondNumber: number) {
+    let result = firstNumber - secondNumber
+    return Number(result.toFixed(decimalPlace))
+}
+
+function multiply(firstNumber: number, secondNumber: number) {
+    let result = firstNumber * secondNumber
+    return Number(result.toFixed(decimalPlace))
+}
+
+function divide(firstNumber: number, secondNumber: number) {
+    let result = firstNumber / secondNumber
+    return Number(result.toFixed(decimalPlace))
+}
+
+function canOperate(firstNumber: number | null, operator: string | null, secondNumber: number | null): boolean {
+    return firstNumber !== null && operator !== null && secondNumber !== null
+}
+
+function operate(firstNumber: number, operator: string, secondNumber: number) {
+    if (operator === "+") {
+        firstNumber = add(firstNumber, secondNumber)
+    }
+    displayValue(firstNumber)
 }

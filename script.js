@@ -3,6 +3,8 @@ var firstNumber = null;
 var secondNumber = null;
 var operator = null;
 var decimal = false;
+var result;
+var decimalPlace = 6;
 var buttons = document.querySelectorAll("button");
 buttons.forEach(function (button) {
     var text = button.textContent;
@@ -10,6 +12,13 @@ buttons.forEach(function (button) {
         button.addEventListener("click", function (e) {
             getInput(e);
             setInput(input);
+        });
+    }
+    if (text === '=') {
+        button.addEventListener("click", function () {
+            if (canOperate(firstNumber, operator, secondNumber)) {
+                operate(firstNumber, operator, secondNumber);
+            }
         });
     }
 });
@@ -111,4 +120,29 @@ function isFirstNumberZero(firstNumber) {
 }
 function isSecondNumberZero(secondNumber) {
     return secondNumber === 0;
+}
+function add(firstNumber, secondNumber) {
+    var result = firstNumber + secondNumber;
+    return Number(result.toFixed(decimalPlace));
+}
+function subtract(firstNumber, secondNumber) {
+    var result = firstNumber - secondNumber;
+    return Number(result.toFixed(decimalPlace));
+}
+function multiply(firstNumber, secondNumber) {
+    var result = firstNumber * secondNumber;
+    return Number(result.toFixed(decimalPlace));
+}
+function divide(firstNumber, secondNumber) {
+    var result = firstNumber / secondNumber;
+    return Number(result.toFixed(decimalPlace));
+}
+function canOperate(firstNumber, operator, secondNumber) {
+    return firstNumber !== null && operator !== null && secondNumber !== null;
+}
+function operate(firstNumber, operator, secondNumber) {
+    if (operator === "+") {
+        firstNumber = add(firstNumber, secondNumber);
+    }
+    displayValue(firstNumber);
 }
