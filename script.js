@@ -7,7 +7,9 @@ var buttons = document.querySelectorAll("button");
 buttons.forEach(function (button) {
     var text = button.textContent;
     if (text !== '=' && text !== 'backSpace' && text !== 'clear') {
-        button.addEventListener("click", getInput);
+        button.addEventListener("click", function (e) {
+            getInput(e);
+        });
     }
 });
 function getInput(event) {

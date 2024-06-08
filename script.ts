@@ -10,7 +10,9 @@ const buttons = document.querySelectorAll("button")
 buttons.forEach(button=>{
     const text = button.textContent!
     if(text !== '=' && text !== 'backSpace' && text !== 'clear'){
-        button.addEventListener("click", getInput)
+        button.addEventListener("click", (e:Event)=>{
+            getInput(e)
+        })
     }
 })
 
