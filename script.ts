@@ -52,7 +52,7 @@ function setInput(input: string) {
     //     setDecimal()
     //     displayValue(firstNumber, operator, null, decimal)
     // }
-    else if (isInputFirstDecimal(firstNumber, input, operator, decimal)) {
+    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator, decimal)) {
         setDecimal()
         displayValue(firstNumber, operator, secondNumber, decimal)
     }
@@ -66,7 +66,7 @@ function setInput(input: string) {
         resetDecimal()
         displayValue(firstNumber, operator, "", decimal)
     }
-    else if (isFirstOperator(firstNumber, operator, input)) {
+    else if (isFirstOperator(firstNumber, operator, input, decimal)) {
         setOperator(input)
         displayValue(firstNumber, operator)
     }
@@ -79,7 +79,7 @@ function setInput(input: string) {
         displayValue(firstNumber, operator, secondNumber)
     }
     // For secondNumber
-    else if (isInputFirstDecimal(secondNumber, input, operator, decimal)) {
+    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator, decimal)) {
         setDecimal()
         displayValue(firstNumber, operator, secondNumber, decimal)
     }
@@ -89,12 +89,12 @@ function isDecimalinFirstNumber(firstNumber: number | null, input: string, opera
     return firstNumber !== null && input === "." && operator === null && decimal === ""
 }
 
-function isInputFirstDecimal(number: string, input: string, operator: string | null, decimal: string): boolean {
+function isInputFirstDecimal(firstNumber: string, secondNumber: string, input: string, operator: string | null, decimal: string): boolean {
     //For the firstNumber
-    if (number !== "" && input === "." && operator === null && decimal === "") return true
+    if (firstNumber !== "" && input === "." && operator === null && decimal === "") return true
 
     // for the secondNumber
-    else if (number !== "" && input === "." && operator && decimal === "") return true
+    else if (secondNumber && firstNumber && input === "." && operator && decimal === "") return true
 
     return false
 }

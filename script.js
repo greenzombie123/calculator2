@@ -44,7 +44,7 @@ function setInput(input) {
     //     setDecimal()
     //     displayValue(firstNumber, operator, null, decimal)
     // }
-    else if (isInputFirstDecimal(firstNumber, input, operator, decimal)) {
+    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator, decimal)) {
         setDecimal();
         displayValue(firstNumber, operator, secondNumber, decimal);
     }
@@ -58,7 +58,7 @@ function setInput(input) {
         resetDecimal();
         displayValue(firstNumber, operator, "", decimal);
     }
-    else if (isFirstOperator(firstNumber, operator, input)) {
+    else if (isFirstOperator(firstNumber, operator, input, decimal)) {
         setOperator(input);
         displayValue(firstNumber, operator);
     }
@@ -71,7 +71,7 @@ function setInput(input) {
         displayValue(firstNumber, operator, secondNumber);
     }
     // For secondNumber
-    else if (isInputFirstDecimal(secondNumber, input, operator, decimal)) {
+    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator, decimal)) {
         setDecimal();
         displayValue(firstNumber, operator, secondNumber, decimal);
     }
@@ -79,12 +79,12 @@ function setInput(input) {
 function isDecimalinFirstNumber(firstNumber, input, operator, decimal) {
     return firstNumber !== null && input === "." && operator === null && decimal === "";
 }
-function isInputFirstDecimal(number, input, operator, decimal) {
+function isInputFirstDecimal(firstNumber, secondNumber, input, operator, decimal) {
     //For the firstNumber
-    if (number !== "" && input === "." && operator === null && decimal === "")
+    if (firstNumber !== "" && input === "." && operator === null && decimal === "")
         return true;
     // for the secondNumber
-    else if (number !== "" && input === "." && operator && decimal === "")
+    else if (secondNumber && firstNumber && input === "." && operator && decimal === "")
         return true;
     return false;
 }
