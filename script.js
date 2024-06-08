@@ -28,7 +28,7 @@ function setInput(input) {
         setFirstNumber(input);
         displayValue(firstNumber);
     }
-    else if (isFirstNumberGetBigger(input)) {
+    else if (isFirstNumberGetBigger(input, operator, firstNumber)) {
         setFirstNumber(input);
         displayValue(firstNumber);
     }
@@ -51,7 +51,7 @@ function isFirstNumberEmpty(input) {
     else
         return false;
 }
-function isFirstNumberGetBigger(iput) {
+function isFirstNumberGetBigger(iput, operator, firstNumber) {
     if (firstNumber !== null && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber))
         return true;
     return false;
