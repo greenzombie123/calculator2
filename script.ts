@@ -116,7 +116,7 @@ function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumb
 
 function setFirstNumber(input: string | number, decimal: string = "") {
     if (typeof input === "string" && decimal === "." && firstNumber !== null) {
-        firstNumber += +(decimal + input)
+        firstNumber = +(firstNumber + decimal + input)
     }
     // The input here is the result of an operation
     else if (typeof input === 'number') {
