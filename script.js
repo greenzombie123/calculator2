@@ -28,9 +28,15 @@ function setInput(input) {
         setFirstNumber(input);
         displayValue(firstNumber);
     }
+    else if (isFirstNumberGetBigger(input)) {
+        console.log(123);
+    }
 }
 function isFirstNumberEmpty(input) {
     return !firstNumber && !operator && isInputNumber(input);
+}
+function isFirstNumberGetBigger(iput) {
+    return firstNumber && !operator && isInputNumber(input);
 }
 function setFirstNumber(input) {
     if (firstNumber === null) {

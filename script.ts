@@ -36,10 +36,17 @@ function setInput(input: string) {
         setFirstNumber(input)
         displayValue(firstNumber)
     }
+    else if (isFirstNumberGetBigger(input)){
+        console.log(123)
+    }
 }
 
 function isFirstNumberEmpty(input: string) {
     return !firstNumber && !operator && isInputNumber(input)
+}
+
+function isFirstNumberGetBigger(iput: string){
+    return firstNumber && !operator && isInputNumber(input)
 }
 
 function setFirstNumber(input: string) {
