@@ -153,6 +153,18 @@ function operate(firstNumber, operator, secondNumber) {
         var result = add(firstNumber, secondNumber);
         setFirstNumber(result);
     }
+    else if (operator === "-") {
+        var result = subtract(firstNumber, secondNumber);
+        setFirstNumber(result);
+    }
+    else if (operator === "x") {
+        var result = multiply(firstNumber, secondNumber);
+        setFirstNumber(result);
+    }
+    else if (operator === "/") {
+        var result = divide(firstNumber, secondNumber);
+        setFirstNumber(result);
+    }
     displayValue(getFirstNumber());
     setSecondNumber(null);
     setOperator(null);

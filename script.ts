@@ -172,6 +172,19 @@ function operate(firstNumber: number, operator: string, secondNumber: number) {
         let result = add(firstNumber, secondNumber)
         setFirstNumber(result)
     }
+    else if(operator === "-"){
+        let result = subtract(firstNumber, secondNumber)
+        setFirstNumber(result)
+    }
+    else if (operator === "x") {
+        let result = multiply(firstNumber, secondNumber)
+        setFirstNumber(result)
+    }
+    else if(operator === "/"){
+        let result = divide(firstNumber, secondNumber)
+        setFirstNumber(result)
+    }
+
     displayValue(getFirstNumber())
     setSecondNumber(null)
     setOperator(null)
