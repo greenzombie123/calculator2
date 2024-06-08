@@ -56,7 +56,12 @@ function setInput(input: string) {
         setDecimal()
         displayValue(firstNumber, operator, null, decimal)
     }
-    else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
+    // else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
+    //     setFirstNumber(input, decimal)
+    //     resetDecimal()
+    //     displayValue(firstNumber, operator, null, decimal)
+    // }
+    else if (isNumberDecimalNumber(firstNumber, input, operator, decimal)) {
         setFirstNumber(input, decimal)
         resetDecimal()
         displayValue(firstNumber, operator, null, decimal)
@@ -87,7 +92,7 @@ function isFirstNumberDecimalNumber(firstNumber: number | null, input: string, o
     return firstNumber !== null && isInputNumber(input) && operator === null && decimal === "."
 }
 
-function isNumberDecimalNumber<T>(number: T | null, input: string, operator: string | null, decimal: string) {
+function isNumberDecimalNumber(number: number | null, input: string, operator: string | null, decimal: string) {
     return number !== null && isInputNumber(input) && operator === null && decimal === "."
 }
 

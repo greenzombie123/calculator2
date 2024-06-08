@@ -48,7 +48,12 @@ function setInput(input) {
         setDecimal();
         displayValue(firstNumber, operator, null, decimal);
     }
-    else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
+    // else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
+    //     setFirstNumber(input, decimal)
+    //     resetDecimal()
+    //     displayValue(firstNumber, operator, null, decimal)
+    // }
+    else if (isNumberDecimalNumber(firstNumber, input, operator, decimal)) {
         setFirstNumber(input, decimal);
         resetDecimal();
         displayValue(firstNumber, operator, null, decimal);
