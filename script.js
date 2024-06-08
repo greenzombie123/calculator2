@@ -32,12 +32,20 @@ function setInput(input) {
         setFirstNumber(input);
         displayValue(firstNumber);
     }
+    else if (isFirstOperator(firstNumber, operator, input)) {
+        console.log(12);
+    }
 }
 function isFirstNumberEmpty(input) {
-    return !firstNumber && !operator && isInputNumber(input);
+    if (!firstNumber && !operator && isInputNumber(input))
+        return true;
+    else
+        return false;
 }
 function isFirstNumberGetBigger(iput) {
-    return firstNumber && !operator && isInputNumber(input);
+    if (firstNumber && !operator && isInputNumber(input))
+        return true;
+    return false;
 }
 function setFirstNumber(input) {
     if (firstNumber === null) {
@@ -48,7 +56,16 @@ function setFirstNumber(input) {
     }
 }
 function setSecondNumber() { }
-function isOperatorSet() { }
+function isInputOperator(input) {
+    // Check if the input is a =, +, *, or /
+    return Number.isNaN(Number(input));
+}
+function isFirstOperator(firstNumber, operator, input) {
+    if (firstNumber && !operator && isInputOperator(input))
+        return true;
+    else
+        return false;
+}
 function displayValue(firstNumber, operator, secondNumber, decimal) {
     if (firstNumber === void 0) { firstNumber = null; }
     if (operator === void 0) { operator = null; }
