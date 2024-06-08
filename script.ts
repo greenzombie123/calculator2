@@ -52,7 +52,7 @@ function isFirstNumberEmpty(input: string) {
 }
 
 function isFirstNumberGetBigger(iput: string) {
-    if(firstNumber && !operator && isInputNumber(input)) return true
+    if(firstNumber && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber)) return true
     return false
 }
 
@@ -90,3 +90,7 @@ function displayValue(firstNumber: number | null = null, operator: string | null
 function reset() { }
 
 function removeLastInput() { }
+
+function isFirstNumberZero(firstNumber:number){
+    return firstNumber === 0
+}

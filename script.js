@@ -44,7 +44,7 @@ function isFirstNumberEmpty(input) {
         return false;
 }
 function isFirstNumberGetBigger(iput) {
-    if (firstNumber && !operator && isInputNumber(input))
+    if (firstNumber && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber))
         return true;
     return false;
 }
@@ -80,3 +80,6 @@ function displayValue(firstNumber, operator, secondNumber, decimal) {
 }
 function reset() { }
 function removeLastInput() { }
+function isFirstNumberZero(firstNumber) {
+    return firstNumber === 0;
+}
