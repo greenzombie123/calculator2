@@ -1,4 +1,4 @@
-let input: number | string;
+let input: string;
 let firstNumber: number | null = null;
 let secondNumber: number | null = null;
 let operator: string | null = null;
@@ -12,9 +12,6 @@ buttons.forEach(button => {
     if (text !== '=' && text !== 'backSpace' && text !== 'clear') {
         button.addEventListener("click", (e: Event) => {
             getInput(e)
-            if (isInputNumber(input)) {
-                input = changeToNumber(input as string)
-            }
             setInput(input)
         })
     }
@@ -24,7 +21,7 @@ function getInput(event: Event) {
     input = (event.target as Element).textContent!
 }
 
-function isInputNumber(input: string | number): boolean {
+function isInputNumber(input: string): boolean {
     // String with no numbers will turn into a Nan. If its a NaN, it aint a valid number so return false
     return !Number.isNaN(Number(input))
 }
@@ -34,18 +31,22 @@ function changeToNumber(input: string): number {
 
 }
 
-
-function setInput(input: string | number) {
-    if(isFirstNumberEmpty(input)){
-        console.log(1)
+function setInput(input: string) {
+    if (isFirstNumberEmpty(input)) {
+        //setFirstNumber(input)
+        console.log(212)
     }
 }
 
-function isFirstNumberEmpty(input:string|number) {
+function isFirstNumberEmpty(input: string) {
     return !firstNumber && !operator && isInputNumber(input)
 }
 
-function setFirstNumber() { }
+function setFirstNumber(input: number) {
+    firstNumber = input
+}
+
+
 function setSecondNumber() { }
 function isOperatorSet() { }
 function displayValue() { }

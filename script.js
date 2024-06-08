@@ -9,9 +9,6 @@ buttons.forEach(function (button) {
     if (text !== '=' && text !== 'backSpace' && text !== 'clear') {
         button.addEventListener("click", function (e) {
             getInput(e);
-            if (isInputNumber(input)) {
-                input = changeToNumber(input);
-            }
             setInput(input);
         });
     }
@@ -28,13 +25,16 @@ function changeToNumber(input) {
 }
 function setInput(input) {
     if (isFirstNumberEmpty(input)) {
-        console.log(1);
+        //setFirstNumber(input)
+        console.log(212);
     }
 }
 function isFirstNumberEmpty(input) {
     return !firstNumber && !operator && isInputNumber(input);
 }
-function setFirstNumber() { }
+function setFirstNumber(input) {
+    firstNumber = input;
+}
 function setSecondNumber() { }
 function isOperatorSet() { }
 function displayValue() { }
