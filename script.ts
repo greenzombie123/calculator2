@@ -33,8 +33,7 @@ function changeToNumber(input: string): number {
 
 function setInput(input: string) {
     if (isFirstNumberEmpty(input)) {
-        //setFirstNumber(input)
-        console.log(212)
+        setFirstNumber(input)
     }
 }
 
@@ -42,8 +41,10 @@ function isFirstNumberEmpty(input: string) {
     return !firstNumber && !operator && isInputNumber(input)
 }
 
-function setFirstNumber(input: number) {
-    firstNumber = input
+function setFirstNumber(input: string) {
+    if(firstNumber === null){
+        firstNumber = +input
+    }
 }
 
 

@@ -25,15 +25,16 @@ function changeToNumber(input) {
 }
 function setInput(input) {
     if (isFirstNumberEmpty(input)) {
-        //setFirstNumber(input)
-        console.log(212);
+        setFirstNumber(input);
     }
 }
 function isFirstNumberEmpty(input) {
     return !firstNumber && !operator && isInputNumber(input);
 }
 function setFirstNumber(input) {
-    firstNumber = input;
+    if (firstNumber === null) {
+        firstNumber = +input;
+    }
 }
 function setSecondNumber() { }
 function isOperatorSet() { }
