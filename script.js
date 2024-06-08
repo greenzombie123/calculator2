@@ -36,15 +36,19 @@ function setInput(input) {
         setOperator(input);
         displayValue(firstNumber, operator);
     }
+    else if (isSecondNumberEmpty(input)) {
+        setSecondNumber(input);
+        displayValue(firstNumber, operator, secondNumber);
+    }
 }
 function isFirstNumberEmpty(input) {
-    if (!firstNumber && !operator && isInputNumber(input))
+    if (firstNumber === null && !operator && isInputNumber(input))
         return true;
     else
         return false;
 }
 function isFirstNumberGetBigger(iput) {
-    if (firstNumber && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber))
+    if (firstNumber !== null && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber))
         return true;
     return false;
 }
@@ -56,7 +60,25 @@ function setFirstNumber(input) {
         firstNumber = +(firstNumber + input);
     }
 }
-function setSecondNumber() { }
+function isSecondNumberEmpty(input) {
+    if (secondNumber === null && operator && isInputNumber(input))
+        return true;
+    else
+        return false;
+}
+function isSecondNumberGetBigger(input, secondNumber) {
+    if (secondNumber !== null && isInputNumber(input) && !isSecondNumberZero(secondNumber))
+        return true;
+    return false;
+}
+function setSecondNumber(input) {
+    if (secondNumber === null) {
+        secondNumber = +input;
+    }
+    else if (secondNumber) {
+        secondNumber = +(secondNumber + input);
+    }
+}
 function setOperator(input) {
     operator = input;
 }
@@ -65,7 +87,7 @@ function isInputOperator(input) {
     return Number.isNaN(Number(input));
 }
 function isFirstOperator(firstNumber, operator, input) {
-    if (firstNumber && !operator && isInputOperator(input))
+    if (firstNumber !== null && !operator && isInputOperator(input))
         return true;
     else
         return false;
@@ -76,10 +98,13 @@ function displayValue(firstNumber, operator, secondNumber, decimal) {
     if (secondNumber === void 0) { secondNumber = null; }
     if (decimal === void 0) { decimal = false; }
     var display = document.querySelector('.display');
-    display.textContent = "".concat(firstNumber).concat(operator ? " " + operator + " " : "");
+    display.textContent = "".concat(firstNumber !== null ? firstNumber : "").concat(operator ? " " + operator + " " : "").concat(secondNumber !== null ? secondNumber : "");
 }
 function reset() { }
 function removeLastInput() { }
 function isFirstNumberZero(firstNumber) {
     return firstNumber === 0;
+}
+function isSecondNumberZero(secondNumber) {
+    return secondNumber === 0;
 }

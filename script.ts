@@ -40,19 +40,23 @@ function setInput(input: string) {
         setFirstNumber(input)
         displayValue(firstNumber)
     }
-    else if (isFirstOperator(firstNumber, operator, input)){
+    else if (isFirstOperator(firstNumber, operator, input)) {
         setOperator(input)
         displayValue(firstNumber, operator)
+    }
+    else if (isSecondNumberEmpty(input)) {
+        setSecondNumber(input)
+        displayValue(firstNumber, operator, secondNumber)
     }
 }
 
 function isFirstNumberEmpty(input: string) {
-    if(!firstNumber && !operator && isInputNumber(input)) return true
+    if (firstNumber === null && !operator && isInputNumber(input)) return true
     else return false
 }
 
 function isFirstNumberGetBigger(iput: string) {
-    if(firstNumber && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber)) return true
+    if (firstNumber !== null && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber)) return true
     return false
 }
 
@@ -65,10 +69,27 @@ function setFirstNumber(input: string) {
     }
 }
 
+function isSecondNumberEmpty(input: string) {
+    if (secondNumber === null && operator && isInputNumber(input)) return true
+    else return false
+}
 
-function setSecondNumber() { }
+function isSecondNumberGetBigger(input: string, secondNumber: number) {
+    if (secondNumber !== null && isInputNumber(input) && !isSecondNumberZero(secondNumber)) return true
+    return false
+}
 
-function setOperator(input:string){
+
+function setSecondNumber(input: string) {
+    if (secondNumber === null) {
+        secondNumber = +input
+    }
+    else if (secondNumber) {
+        secondNumber = +(secondNumber + input)
+    }
+}
+
+function setOperator(input: string) {
     operator = input
 }
 
@@ -77,20 +98,24 @@ function isInputOperator(input: string) {
     return Number.isNaN(Number(input))
 }
 
-function isFirstOperator(firstNumber:number|null, operator:string|null, input:string):boolean{
-    if(firstNumber && !operator && isInputOperator(input)) return true
+function isFirstOperator(firstNumber: number | null, operator: string | null, input: string): boolean {
+    if (firstNumber !== null && !operator && isInputOperator(input)) return true
     else return false
 }
 
 function displayValue(firstNumber: number | null = null, operator: string | null = null, secondNumber: number | null = null, decimal: boolean = false) {
     const display = document.querySelector('.display')!
-    display.textContent = `${firstNumber}${operator ? " " + operator + " " : ""}`
+    display.textContent = `${firstNumber !== null ? firstNumber : ""}${operator ? " " + operator + " " : ""}${secondNumber !== null ? secondNumber : ""}`
 }
 
 function reset() { }
 
 function removeLastInput() { }
 
-function isFirstNumberZero(firstNumber:number){
+function isFirstNumberZero(firstNumber: number) {
     return firstNumber === 0
+}
+
+function isSecondNumberZero(secondNumber: number) {
+    return secondNumber === 0
 }
