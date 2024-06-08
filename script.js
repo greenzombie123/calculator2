@@ -26,6 +26,7 @@ function changeToNumber(input) {
 function setInput(input) {
     if (isFirstNumberEmpty(input)) {
         setFirstNumber(input);
+        displayValue(firstNumber);
     }
 }
 function isFirstNumberEmpty(input) {
@@ -38,6 +39,13 @@ function setFirstNumber(input) {
 }
 function setSecondNumber() { }
 function isOperatorSet() { }
-function displayValue() { }
+function displayValue(firstNumber, operator, secondNumber, decimal) {
+    if (firstNumber === void 0) { firstNumber = null; }
+    if (operator === void 0) { operator = null; }
+    if (secondNumber === void 0) { secondNumber = null; }
+    if (decimal === void 0) { decimal = false; }
+    var display = document.querySelector('.display');
+    display.textContent = "".concat(firstNumber);
+}
 function reset() { }
 function removeLastInput() { }

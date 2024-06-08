@@ -34,6 +34,7 @@ function changeToNumber(input: string): number {
 function setInput(input: string) {
     if (isFirstNumberEmpty(input)) {
         setFirstNumber(input)
+        displayValue(firstNumber)
     }
 }
 
@@ -42,14 +43,21 @@ function isFirstNumberEmpty(input: string) {
 }
 
 function setFirstNumber(input: string) {
-    if(firstNumber === null){
+    if (firstNumber === null) {
         firstNumber = +input
     }
 }
 
 
 function setSecondNumber() { }
+
 function isOperatorSet() { }
-function displayValue() { }
+
+function displayValue(firstNumber: number | null = null, operator: string | null = null, secondNumber: number | null = null, decimal: boolean = false) {
+    const display = document.querySelector('.display')!
+    display.textContent = `${firstNumber}`
+}
+
 function reset() { }
+
 function removeLastInput() { }
