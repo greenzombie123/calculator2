@@ -48,7 +48,11 @@ function setInput(input: string) {
         setFirstNumber(input)
         displayValue(firstNumber)
     }
-    else if (isDecimalinFirstNumber(firstNumber, input, operator, decimal)) {
+    // else if (isDecimalinFirstNumber(firstNumber, input, operator, decimal)) {
+    //     setDecimal()
+    //     displayValue(firstNumber, operator, null, decimal)
+    // }
+    else if (isInputFirstDecimal(firstNumber, input, operator, decimal)) {
         setDecimal()
         displayValue(firstNumber, operator, null, decimal)
     }
@@ -75,8 +79,16 @@ function isDecimalinFirstNumber(firstNumber: number | null, input: string, opera
     return firstNumber !== null && input === "." && operator === null && decimal === ""
 }
 
+function isInputFirstDecimal(number: number | null, input: string, operator: string | null, decimal: string):boolean {
+    return number !== null && input === "." && operator === null && decimal === ""
+}
+
 function isFirstNumberDecimalNumber(firstNumber: number | null, input: string, operator: string | null, decimal: string) {
     return firstNumber !== null && isInputNumber(input) && operator === null && decimal === "."
+}
+
+function isNumberDecimalNumber<T>(number: T | null, input: string, operator: string | null, decimal: string) {
+    return number !== null && isInputNumber(input) && operator === null && decimal === "."
 }
 
 function setDecimal() {
@@ -142,7 +154,7 @@ function setOperator(input: string | null) {
 
 function isInputOperator(input: string) {
     // Check if the input is a =, +, *, or /
-    return Number.isNaN(Number(input))
+    return input === "+" || input === "-" || input === "/" || input === "x"
 }
 
 function isFirstOperator(firstNumber: number | null, operator: string | null, input: string): boolean {

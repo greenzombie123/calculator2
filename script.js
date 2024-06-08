@@ -40,7 +40,11 @@ function setInput(input) {
         setFirstNumber(input);
         displayValue(firstNumber);
     }
-    else if (isDecimalinFirstNumber(firstNumber, input, operator, decimal)) {
+    // else if (isDecimalinFirstNumber(firstNumber, input, operator, decimal)) {
+    //     setDecimal()
+    //     displayValue(firstNumber, operator, null, decimal)
+    // }
+    else if (isInputFirstDecimal(firstNumber, input, operator, decimal)) {
         setDecimal();
         displayValue(firstNumber, operator, null, decimal);
     }
@@ -65,8 +69,14 @@ function setInput(input) {
 function isDecimalinFirstNumber(firstNumber, input, operator, decimal) {
     return firstNumber !== null && input === "." && operator === null && decimal === "";
 }
+function isInputFirstDecimal(number, input, operator, decimal) {
+    return number !== null && input === "." && operator === null && decimal === "";
+}
 function isFirstNumberDecimalNumber(firstNumber, input, operator, decimal) {
     return firstNumber !== null && isInputNumber(input) && operator === null && decimal === ".";
+}
+function isNumberDecimalNumber(number, input, operator, decimal) {
+    return number !== null && isInputNumber(input) && operator === null && decimal === ".";
 }
 function setDecimal() {
     decimal = ".";
@@ -128,7 +138,7 @@ function setOperator(input) {
 }
 function isInputOperator(input) {
     // Check if the input is a =, +, *, or /
-    return Number.isNaN(Number(input));
+    return input === "+" || input === "-" || input === "/" || input === "x";
 }
 function isFirstOperator(firstNumber, operator, input) {
     if (firstNumber !== null && !operator && isInputOperator(input))
