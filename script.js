@@ -46,7 +46,7 @@ function setInput(input) {
     // }
     else if (isInputFirstDecimal(firstNumber, input, operator, decimal)) {
         setDecimal();
-        displayValue(firstNumber, operator, "", decimal);
+        displayValue(firstNumber, operator, secondNumber, decimal);
     }
     // else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
     //     setFirstNumber(input, decimal)
@@ -70,12 +70,23 @@ function setInput(input) {
         setSecondNumber(input);
         displayValue(firstNumber, operator, secondNumber);
     }
+    // For secondNumber
+    else if (isInputFirstDecimal(secondNumber, input, operator, decimal)) {
+        setDecimal();
+        displayValue(firstNumber, operator, secondNumber, decimal);
+    }
 }
 function isDecimalinFirstNumber(firstNumber, input, operator, decimal) {
     return firstNumber !== null && input === "." && operator === null && decimal === "";
 }
 function isInputFirstDecimal(number, input, operator, decimal) {
-    return number !== "" && input === "." && operator === null && decimal === "";
+    //For the firstNumber
+    if (number !== "" && input === "." && operator === null && decimal === "")
+        return true;
+    // for the secondNumber
+    else if (number !== "" && input === "." && operator && decimal === "")
+        return true;
+    return false;
 }
 function isFirstNumberDecimalNumber(firstNumber, input, operator, decimal) {
     return firstNumber !== null && isInputNumber(input) && operator === null && decimal === ".";
@@ -146,11 +157,8 @@ function isInputOperator(input) {
     // Check if the input is a =, +, *, or /
     return input === "+" || input === "-" || input === "/" || input === "x";
 }
-function isFirstOperator(firstNumber, operator, input) {
-    if (firstNumber !== "" && !operator && isInputOperator(input))
-        return true;
-    else
-        return false;
+function isFirstOperator(firstNumber, operator, input, decimal) {
+    return firstNumber !== "" && !operator && isInputOperator(input) && !decimal;
 }
 function displayValue(firstNumber, operator, secondNumber, decimal) {
     if (firstNumber === void 0) { firstNumber = ""; }
@@ -158,7 +166,7 @@ function displayValue(firstNumber, operator, secondNumber, decimal) {
     if (secondNumber === void 0) { secondNumber = ""; }
     if (decimal === void 0) { decimal = ""; }
     var display = document.querySelector('.display');
-    display.textContent = "".concat(firstNumber !== "" ? firstNumber : "").concat(decimal ? '.' : "").concat(operator ? " " + operator + " " : "").concat(secondNumber !== null ? secondNumber : "");
+    display.textContent = "".concat(firstNumber !== "" ? firstNumber : "").concat(decimal && firstNumber && !secondNumber ? '.' : "").concat(operator ? " " + operator + " " : "").concat(secondNumber !== "" ? secondNumber : "").concat(decimal && secondNumber && firstNumber ? '.' : "");
 }
 function reset() { }
 function removeLastInput() { }
