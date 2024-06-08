@@ -27,9 +27,12 @@ function changeToNumber(input) {
     return +input;
 }
 function setInput(input) {
-    if (!firstNumber && !operator && isInputNumber(input)) {
-        console.log(123);
+    if (isFirstNumberEmpty(input)) {
+        console.log(1);
     }
+}
+function isFirstNumberEmpty(input) {
+    return !firstNumber && !operator && isInputNumber(input);
 }
 function setFirstNumber() { }
 function setSecondNumber() { }

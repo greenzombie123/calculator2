@@ -1,18 +1,18 @@
-let input:number|string;
-let firstNumber:number|null = null;
-let secondNumber:number|null = null;
-let operator:string|null = null;
+let input: number | string;
+let firstNumber: number | null = null;
+let secondNumber: number | null = null;
+let operator: string | null = null;
 let decimal = false;
 
 
 const buttons = document.querySelectorAll("button")
 
-buttons.forEach(button=>{
+buttons.forEach(button => {
     const text = button.textContent!
-    if(text !== '=' && text !== 'backSpace' && text !== 'clear'){
-        button.addEventListener("click", (e:Event)=>{
+    if (text !== '=' && text !== 'backSpace' && text !== 'clear') {
+        button.addEventListener("click", (e: Event) => {
             getInput(e)
-            if(isInputNumber(input)){
+            if (isInputNumber(input)) {
                 input = changeToNumber(input as string)
             }
             setInput(input)
@@ -20,30 +20,34 @@ buttons.forEach(button=>{
     }
 })
 
-function getInput(event:Event){
+function getInput(event: Event) {
     input = (event.target as Element).textContent!
 }
 
-function isInputNumber(input:string|number):boolean{
+function isInputNumber(input: string | number): boolean {
     // String with no numbers will turn into a Nan. If its a NaN, it aint a valid number so return false
     return !Number.isNaN(Number(input))
 }
 
-function changeToNumber(input:string):number{
+function changeToNumber(input: string): number {
     return +input
 
 }
 
 
-function setInput(input:string|number){
-   if(!firstNumber && !operator && isInputNumber(input)){
-    console.log(123)
-   }
+function setInput(input: string | number) {
+    if(isFirstNumberEmpty(input)){
+        console.log(1)
+    }
 }
 
-function setFirstNumber(){}
-function setSecondNumber(){}
-function isOperatorSet(){}
-function displayValue(){}
-function reset(){}
-function removeLastInput(){}
+function isFirstNumberEmpty(input:string|number) {
+    return !firstNumber && !operator && isInputNumber(input)
+}
+
+function setFirstNumber() { }
+function setSecondNumber() { }
+function isOperatorSet() { }
+function displayValue() { }
+function reset() { }
+function removeLastInput() { }
