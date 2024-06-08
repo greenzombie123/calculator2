@@ -15,6 +15,7 @@ buttons.forEach(button=>{
             if(isInputNumber(input)){
                 input = changeToNumber(input as string)
             }
+            setInput(input)
         })
     }
 })
@@ -23,8 +24,6 @@ function getInput(event:Event){
     input = (event.target as Element).textContent!
 }
 
-function setInput(input){}
-
 function isInputNumber(input:string|number):boolean{
     // String with no numbers will turn into a Nan. If its a NaN, it aint a valid number so return false
     return !Number.isNaN(Number(input))
@@ -32,7 +31,19 @@ function isInputNumber(input:string|number):boolean{
 
 function changeToNumber(input:string):number{
     return +input
+
 }
 
+
+function setInput(input:string|number){
+   if(!firstNumber && !operator && isInputNumber(input)){
+    console.log(123)
+   }
+}
+
+function setFirstNumber(){}
+function setSecondNumber(){}
+function isOperatorSet(){}
+function displayValue(){}
 function reset(){}
 function removeLastInput(){}

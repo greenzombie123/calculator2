@@ -12,13 +12,13 @@ buttons.forEach(function (button) {
             if (isInputNumber(input)) {
                 input = changeToNumber(input);
             }
+            setInput(input);
         });
     }
 });
 function getInput(event) {
     input = event.target.textContent;
 }
-function setInput(input) { }
 function isInputNumber(input) {
     // String with no numbers will turn into a Nan. If its a NaN, it aint a valid number so return false
     return !Number.isNaN(Number(input));
@@ -26,5 +26,14 @@ function isInputNumber(input) {
 function changeToNumber(input) {
     return +input;
 }
+function setInput(input) {
+    if (!firstNumber && !operator && isInputNumber(input)) {
+        console.log(123);
+    }
+}
+function setFirstNumber() { }
+function setSecondNumber() { }
+function isOperatorSet() { }
+function displayValue() { }
 function reset() { }
 function removeLastInput() { }
