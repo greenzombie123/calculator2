@@ -2,7 +2,7 @@ let input: string;
 let firstNumber: number | null = null;
 let secondNumber: number | null = null;
 let operator: string | null = null;
-let decimalNumber: string = "";
+let decimal: string = "";
 const decimalPlace = 6
 
 
@@ -48,9 +48,14 @@ function setInput(input: string) {
         setFirstNumber(input)
         displayValue(firstNumber)
     }
-    else if (isDecimalinFirstNumber(firstNumber, input, operator, decimalNumber)) {
-        setDecimalNumber(input)
-        displayValue(firstNumber, operator, null, decimalNumber)
+    else if (isDecimalinFirstNumber(firstNumber, input, operator, decimal)) {
+        setDecimal(input)
+        displayValue(firstNumber, operator, null, decimal)
+    }
+    else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
+        setFirstNumber(input, decimal)
+        resetDecimalNumber()
+        displayValue(firstNumber, operator, null, decimal)
     }
     else if (isFirstOperator(firstNumber, operator, input)) {
         setOperator(input)
@@ -66,20 +71,20 @@ function setInput(input: string) {
     }
 }
 
-function isDecimalinFirstNumber(firstNumber: number | null, input: string, operator: string | null, decimalNumber: string) {
-    return firstNumber !== null && input === "." && operator === null && decimalNumber === ""
+function isDecimalinFirstNumber(firstNumber: number | null, input: string, operator: string | null, decimal: string) {
+    return firstNumber !== null && input === "." && operator === null && decimal === ""
 }
 
-function setDecimalNumber(input: number | string) {
-    if (typeof input === "string") {
-        decimalNumber = "."
-    }
-    else
-        decimalNumber += input
+function isFirstNumberDecimalNumber(firstNumber: number | null, input: string, operator: string | null, decimal: string) {
+    return firstNumber !== null && typeof input === "number" && operator === null && decimal === "."
+}
+
+function setDecimal(input: string) {
+    decimal = "."
 }
 
 function resetDecimalNumber() {
-    decimalNumber = ""
+    decimal = ""
 }
 
 function isFirstNumberEmpty(input: string) {
@@ -92,8 +97,12 @@ function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumb
     return false
 }
 
-function setFirstNumber(input: string | number) {
-    if (typeof input === 'number') {
+function setFirstNumber(input: string | number, decimal: string = "") {
+    if (typeof input === "string" && decimal === "." && firstNumber !== null) {
+        firstNumber += +(decimal + input)
+    }
+    // The input here is the result of an operation
+    else if (typeof input === 'number') {
         firstNumber = input
     }
     else if (firstNumber === null) {
