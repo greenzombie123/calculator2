@@ -25,6 +25,11 @@ buttons.forEach(function (button) {
             removeLastInput(secondNumber, operator, firstNumber);
         });
     }
+    if (text === "clear") {
+        button.addEventListener("click", function () {
+            reset();
+        });
+    }
 });
 function getInput(event) {
     input = event.target.textContent;
@@ -220,4 +225,9 @@ function removeSecondNumberDigit() {
     else
         return secondNumber = secondNumber.substring(0, secondNumber.length - 1);
 }
-function reset() { }
+function reset() {
+    secondNumber = "";
+    firstNumber = "";
+    operator = "";
+    displayValue(firstNumber, operator, secondNumber);
+}
