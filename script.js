@@ -2,7 +2,7 @@ var input;
 var firstNumber = "";
 var secondNumber = "";
 var operator = null;
-var decimal = "";
+//let decimal: string = "";
 var decimalPlace = 6;
 var buttons = document.querySelectorAll("button");
 buttons.forEach(function (button) {
@@ -36,29 +36,20 @@ function setInput(input) {
         setFirstNumber(input);
         displayValue(firstNumber);
     }
-    else if (isFirstNumberGetBigger(input, operator, firstNumber, decimal)) {
+    else if (isFirstNumberGetBigger(input, operator, firstNumber)) {
         setFirstNumber(input);
         displayValue(firstNumber);
     }
-    // else if (isDecimalinFirstNumber(firstNumber, input, operator, decimal)) {
-    //     setDecimal()
-    //     displayValue(firstNumber, operator, null, decimal)
-    // }
-    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator, decimal)) {
-        setDecimal();
-        displayValue(firstNumber, operator, secondNumber, decimal);
+    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator)) {
+        setFirstNumber(input);
+        displayValue(firstNumber, operator, secondNumber);
     }
     // else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
     //     setFirstNumber(input, decimal)
     //     resetDecimal()
     //     displayValue(firstNumber, operator, null, decimal)
     // }
-    else if (isNumberDecimalNumber(firstNumber, input, operator, decimal)) {
-        setFirstNumber(input, decimal);
-        resetDecimal();
-        displayValue(firstNumber, operator, "", decimal);
-    }
-    else if (isFirstOperator(firstNumber, operator, input, decimal)) {
+    else if (isFirstOperator(firstNumber, operator, input)) {
         setOperator(input);
         displayValue(firstNumber, operator);
     }
@@ -71,34 +62,24 @@ function setInput(input) {
         displayValue(firstNumber, operator, secondNumber);
     }
     // For secondNumber
-    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator, decimal)) {
-        setDecimal();
-        displayValue(firstNumber, operator, secondNumber, decimal);
+    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator)) {
+        displayValue(firstNumber, operator, secondNumber);
     }
 }
-function isDecimalinFirstNumber(firstNumber, input, operator, decimal) {
-    return firstNumber !== null && input === "." && operator === null && decimal === "";
-}
-function isInputFirstDecimal(firstNumber, secondNumber, input, operator, decimal) {
+// function isDecimalinFirstNumber(firstNumber: number | null, input: string, operator: string | null, decimal: string) {
+//     return firstNumber !== null && input === "." && operator === null && decimal === ""
+// }
+function isInputFirstDecimal(firstNumber, secondNumber, input, operator) {
     //For the firstNumber
-    if (firstNumber !== "" && input === "." && operator === null && decimal === "")
+    if (firstNumber !== "" && Number.isInteger(+firstNumber) && !firstNumber.includes(".") && input === "." && operator === null)
         return true;
     // for the secondNumber
-    else if (secondNumber && firstNumber && input === "." && operator && decimal === "")
+    else if (secondNumber && firstNumber && input === "." && operator && Number.isInteger(secondNumber) && !secondNumber.includes("."))
         return true;
     return false;
 }
 function isFirstNumberDecimalNumber(firstNumber, input, operator, decimal) {
     return firstNumber !== null && isInputNumber(input) && operator === null && decimal === ".";
-}
-function isNumberDecimalNumber(number, input, operator, decimal) {
-    return number !== "" && isInputNumber(input) && operator === null && decimal === ".";
-}
-function setDecimal() {
-    decimal = ".";
-}
-function resetDecimal() {
-    decimal = "";
 }
 function isFirstNumberEmpty(input) {
     if (firstNumber === "" && !operator && isInputNumber(input))
@@ -106,19 +87,15 @@ function isFirstNumberEmpty(input) {
     else
         return false;
 }
-function isFirstNumberGetBigger(iput, operator, firstNumber, decimal) {
-    if (firstNumber !== "" && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber) && decimal === "")
+function isFirstNumberGetBigger(iput, operator, firstNumber) {
+    if (firstNumber !== "" && !operator && isInputNumber(input) && !isFirstNumberZero(firstNumber))
         return true;
     return false;
 }
-function setFirstNumber(input, decimal, isResult) {
-    if (decimal === void 0) { decimal = ""; }
+function setFirstNumber(input, isResult) {
     if (isResult === void 0) { isResult = false; }
-    if (decimal === "." && firstNumber !== null) {
-        firstNumber = firstNumber + decimal + input;
-    }
     // The input here is the result of an operation
-    else if (isResult) {
+    if (isResult) {
         firstNumber = input;
     }
     else if (firstNumber === "") {
@@ -157,16 +134,15 @@ function isInputOperator(input) {
     // Check if the input is a =, +, *, or /
     return input === "+" || input === "-" || input === "/" || input === "x";
 }
-function isFirstOperator(firstNumber, operator, input, decimal) {
-    return firstNumber !== "" && !operator && isInputOperator(input) && !decimal;
+function isFirstOperator(firstNumber, operator, input) {
+    return firstNumber !== "" && !operator && isInputOperator(input);
 }
-function displayValue(firstNumber, operator, secondNumber, decimal) {
+function displayValue(firstNumber, operator, secondNumber) {
     if (firstNumber === void 0) { firstNumber = ""; }
     if (operator === void 0) { operator = null; }
     if (secondNumber === void 0) { secondNumber = ""; }
-    if (decimal === void 0) { decimal = ""; }
     var display = document.querySelector('.display');
-    display.textContent = "".concat(firstNumber !== "" ? firstNumber : "").concat(decimal && firstNumber && !secondNumber ? '.' : "").concat(operator ? " " + operator + " " : "").concat(secondNumber !== "" ? secondNumber : "").concat(decimal && secondNumber && firstNumber ? '.' : "");
+    display.textContent = "".concat(firstNumber !== "" ? firstNumber : "").concat(operator ? " " + operator + " " : "").concat(secondNumber !== "" ? secondNumber : "");
 }
 function reset() { }
 function removeLastInput() { }
@@ -201,19 +177,19 @@ function canOperate(firstNumber, operator, secondNumber) {
 function operate(firstNumber, operator, secondNumber) {
     if (operator === "+") {
         var result = add(firstNumber, secondNumber);
-        setFirstNumber(result, "", true);
+        setFirstNumber(result, true);
     }
     else if (operator === "-") {
         var result = subtract(firstNumber, secondNumber);
-        setFirstNumber(result, "", true);
+        setFirstNumber(result, true);
     }
     else if (operator === "x") {
         var result = multiply(firstNumber, secondNumber);
-        setFirstNumber(result, "", true);
+        setFirstNumber(result, true);
     }
     else if (operator === "/") {
         var result = divide(firstNumber, secondNumber);
-        setFirstNumber(result, "", true);
+        setFirstNumber(result, true);
     }
     displayValue(getFirstNumber());
     setSecondNumber("");
