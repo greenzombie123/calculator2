@@ -52,11 +52,6 @@ function setInput(input: string) {
         setFirstNumber(input)
         displayValue(firstNumber, operator, secondNumber)
     }
-    // else if (isFirstNumberDecimalNumber(firstNumber, input, operator, decimal)) {
-    //     setFirstNumber(input, decimal)
-    //     resetDecimal()
-    //     displayValue(firstNumber, operator, null, decimal)
-    // }
     else if (isFirstOperator(firstNumber, operator, input)) {
         setOperator(input)
         displayValue(firstNumber, operator)
@@ -69,35 +64,23 @@ function setInput(input: string) {
         setSecondNumber(input)
         displayValue(firstNumber, operator, secondNumber)
     }
-    // For secondNumber
     else if (isFirstDecimalForSecondDecimal(secondNumber, input, operator)) {
         setSecondNumber(input)
         displayValue(firstNumber, operator, secondNumber)
     }
+    else if(isSecondOperator(firstNumber, secondNumber, operator, input)){
+        operate(firstNumber, operator, secondNumber)
+        setInput(input)
+        displayValue(firstNumber, operator, secondNumber)
+    }
 }
-
-// function isDecimalinFirstNumber(firstNumber: number | null, input: string, operator: string | null, decimal: string) {
-//     return firstNumber !== null && input === "." && operator === null && decimal === ""
-// }
-
-// function isInputFirstDecimal(firstNumber: string, secondNumber: string, input: string, operator: string | null): boolean {
-//     //For the firstNumber
-//     if (firstNumber !== "" && Number.isInteger(+firstNumber) && !firstNumber.includes(".") && input === "." && operator === null) return true
-
-//     // for the secondNumber
-//     else if (secondNumber && input === "." && operator && Number.isInteger(+secondNumber) && !secondNumber.includes(".")) return true
-
-//     return false
-// }
-
-
 
 function isFirstDecimalForFirstDecimal(firstNumber: string, input: string, operator: string | null): boolean {
     return firstNumber !== "" && Number.isInteger(+firstNumber) && !firstNumber.includes(".") && input === "." && operator === null
 }
-  
 
-function isFirstDecimalForSecondDecimal(secondNumber: string, input: string, operator: string | null): boolean{
+
+function isFirstDecimalForSecondDecimal(secondNumber: string, input: string, operator: string | null): boolean {
     return secondNumber !== "" && input === "." && operator !== null && Number.isInteger(+secondNumber) && !secondNumber.includes(".")
 }
 
@@ -115,7 +98,7 @@ function isFirstNumberGetBigger(iput: string, operator: string | null, firstNumb
     return false
 }
 
-function setFirstNumber(input: string,isResult: boolean = false) {
+function setFirstNumber(input: string, isResult: boolean = false) {
     // The input here is the result of an operation
     if (isResult) {
         firstNumber = input
@@ -209,7 +192,7 @@ function canOperate(firstNumber: string, operator: string | null, secondNumber: 
     return firstNumber !== "" && operator !== null && secondNumber !== ""
 }
 
-function operate(firstNumber: string, operator: string, secondNumber: string) {
+function operate(firstNumber: string, operator: string|null, secondNumber: string) {
     if (operator === "+") {
         let result = add(firstNumber, secondNumber)
         setFirstNumber(result, true)
@@ -230,4 +213,8 @@ function operate(firstNumber: string, operator: string, secondNumber: string) {
     displayValue(getFirstNumber())
     setSecondNumber("")
     setOperator(null)
+}
+
+function isSecondOperator(firstNumber: string, secondNumber: string, operator: string | null, input: string) {
+    return firstNumber && secondNumber && operator && isInputOperator(input)
 }
