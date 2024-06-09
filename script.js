@@ -20,6 +20,11 @@ buttons.forEach(function (button) {
             }
         });
     }
+    if (text === "backspace") {
+        button.addEventListener("click", function () {
+            removeLastInput(secondNumber, operator, firstNumber);
+        });
+    }
 });
 function getInput(event) {
     input = event.target.textContent;
@@ -138,8 +143,6 @@ function displayValue(firstNumber, operator, secondNumber) {
     var display = document.querySelector('.display');
     display.textContent = "".concat(firstNumber !== "" ? firstNumber : "").concat(operator ? " " + operator + " " : "").concat(secondNumber !== "" ? secondNumber : "");
 }
-function reset() { }
-function removeLastInput() { }
 function isFirstNumberZero(firstNumber) {
     return firstNumber === "0";
 }
@@ -192,3 +195,29 @@ function operate(firstNumber, operator, secondNumber) {
 function isSecondOperator(firstNumber, secondNumber, operator, input) {
     return firstNumber && secondNumber && operator && isInputOperator(input);
 }
+function removeLastInput(secondNumber, operator, firstNumber) {
+    if (secondNumber) {
+        secondNumber = removeSecondNumberDigit();
+    }
+    else if (operator) {
+        setOperator(null);
+        operator = null;
+    }
+    else if (firstNumber) {
+        firstNumber = removeFirstNumberDigit();
+    }
+    displayValue(firstNumber, operator, secondNumber);
+}
+function removeFirstNumberDigit() {
+    if (firstNumber.length === 1)
+        return firstNumber = "";
+    else
+        return firstNumber = firstNumber.substring(0, firstNumber.length - 1);
+}
+function removeSecondNumberDigit() {
+    if (secondNumber.length === 1)
+        return secondNumber = "";
+    else
+        return secondNumber = secondNumber.substring(0, secondNumber.length - 1);
+}
+function reset() { }

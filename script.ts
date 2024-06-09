@@ -23,6 +23,11 @@ buttons.forEach(button => {
             }
         })
     }
+    if (text === "backspace") {
+        button.addEventListener("click", () => {
+            removeLastInput(secondNumber, operator, firstNumber)
+        })
+    }
 })
 
 function getInput(event: Event) {
@@ -68,7 +73,7 @@ function setInput(input: string) {
         setSecondNumber(input)
         displayValue(firstNumber, operator, secondNumber)
     }
-    else if(isSecondOperator(firstNumber, secondNumber, operator, input)){
+    else if (isSecondOperator(firstNumber, secondNumber, operator, input)) {
         operate(firstNumber, operator, secondNumber)
         setInput(input)
         displayValue(firstNumber, operator, secondNumber)
@@ -152,10 +157,6 @@ function displayValue(firstNumber: string = "", operator: string | null = null, 
     display.textContent = `${firstNumber !== "" ? firstNumber : ""}${operator ? " " + operator + " " : ""}${secondNumber !== "" ? secondNumber : ""}`
 }
 
-function reset() { }
-
-function removeLastInput() { }
-
 function isFirstNumberZero(firstNumber: string) {
     return firstNumber === "0"
 }
@@ -192,7 +193,7 @@ function canOperate(firstNumber: string, operator: string | null, secondNumber: 
     return firstNumber !== "" && operator !== null && secondNumber !== ""
 }
 
-function operate(firstNumber: string, operator: string|null, secondNumber: string) {
+function operate(firstNumber: string, operator: string | null, secondNumber: string) {
     if (operator === "+") {
         let result = add(firstNumber, secondNumber)
         setFirstNumber(result, true)
@@ -218,3 +219,28 @@ function operate(firstNumber: string, operator: string|null, secondNumber: strin
 function isSecondOperator(firstNumber: string, secondNumber: string, operator: string | null, input: string) {
     return firstNumber && secondNumber && operator && isInputOperator(input)
 }
+
+function removeLastInput(secondNumber: string, operator: string | null, firstNumber: string) {
+    if (secondNumber) {
+        secondNumber = removeSecondNumberDigit()
+    }
+    else if (operator) {
+        setOperator(null)
+        operator = null;
+    }
+    else if (firstNumber) {
+        firstNumber = removeFirstNumberDigit()
+    }
+    displayValue(firstNumber, operator, secondNumber)
+}
+
+function removeFirstNumberDigit() {
+    if (firstNumber.length === 1) return firstNumber = ""
+    else return firstNumber = firstNumber.substring(0, firstNumber.length - 1)
+}
+function removeSecondNumberDigit() {
+    if (secondNumber.length === 1) return secondNumber = ""
+    else return secondNumber = secondNumber.substring(0, secondNumber.length - 1)
+ }
+
+function reset() { }
