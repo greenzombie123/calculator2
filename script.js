@@ -40,7 +40,7 @@ function setInput(input) {
         setFirstNumber(input);
         displayValue(firstNumber);
     }
-    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator)) {
+    else if (isFirstDecimalForFirstDecimal(firstNumber, input, operator)) {
         setFirstNumber(input);
         displayValue(firstNumber, operator, secondNumber);
     }
@@ -62,21 +62,26 @@ function setInput(input) {
         displayValue(firstNumber, operator, secondNumber);
     }
     // For secondNumber
-    else if (isInputFirstDecimal(firstNumber, secondNumber, input, operator)) {
+    else if (isFirstDecimalForSecondDecimal(secondNumber, input, operator)) {
+        setSecondNumber(input);
         displayValue(firstNumber, operator, secondNumber);
     }
 }
 // function isDecimalinFirstNumber(firstNumber: number | null, input: string, operator: string | null, decimal: string) {
 //     return firstNumber !== null && input === "." && operator === null && decimal === ""
 // }
-function isInputFirstDecimal(firstNumber, secondNumber, input, operator) {
-    //For the firstNumber
-    if (firstNumber !== "" && Number.isInteger(+firstNumber) && !firstNumber.includes(".") && input === "." && operator === null)
-        return true;
-    // for the secondNumber
-    else if (secondNumber && firstNumber && input === "." && operator && Number.isInteger(secondNumber) && !secondNumber.includes("."))
-        return true;
-    return false;
+// function isInputFirstDecimal(firstNumber: string, secondNumber: string, input: string, operator: string | null): boolean {
+//     //For the firstNumber
+//     if (firstNumber !== "" && Number.isInteger(+firstNumber) && !firstNumber.includes(".") && input === "." && operator === null) return true
+//     // for the secondNumber
+//     else if (secondNumber && input === "." && operator && Number.isInteger(+secondNumber) && !secondNumber.includes(".")) return true
+//     return false
+// }
+function isFirstDecimalForFirstDecimal(firstNumber, input, operator) {
+    return firstNumber !== "" && Number.isInteger(+firstNumber) && !firstNumber.includes(".") && input === "." && operator === null;
+}
+function isFirstDecimalForSecondDecimal(secondNumber, input, operator) {
+    return secondNumber !== "" && input === "." && operator !== null && Number.isInteger(+secondNumber) && !secondNumber.includes(".");
 }
 function isFirstNumberDecimalNumber(firstNumber, input, operator, decimal) {
     return firstNumber !== null && isInputNumber(input) && operator === null && decimal === ".";
